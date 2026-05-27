@@ -19,7 +19,7 @@ jobs:
         run: pip install python-docx pdfminer.six pyinstaller
 
       - name: Build EXE
-        run: pyinstaller --onefile --windowed --name "PDF_to_Word" src/pdf_to_word.py
+        run: pyinstaller --onefile --windowed --name "PDF_to_Word" pdf_to_word.py
 
       - name: Upload
         uses: actions/upload-artifact@v4
