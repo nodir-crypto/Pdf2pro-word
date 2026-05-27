@@ -1,0 +1,29 @@
+name: Build EXE
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install
+        run: pip install python-docx pdfminer.six pyinstaller
+
+      - name: Build EXE
+        run: pyinstaller --onefile --windowed --name "PDF_to_Word" src/pdf_to_word.py
+
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: PDF_to_Word_EXE
+          path: dist/PDF_to_Word.exe
+          retention-days: 30
